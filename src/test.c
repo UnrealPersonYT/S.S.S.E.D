@@ -1,4 +1,4 @@
-#include "sssed.h"
+#include "ssc/32.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,13 +40,12 @@ i32 main(i32 argc, i8 *argv[]){
         perror("calloc");
         return 1;
     }
-    printf("Info:\nCycles(%llu)\nKeySize(%llu)\nNonceSize(%llu)\n\n", (u64)_SSSED_TOTAL_CYCLES, (u64)_SSSED_KEYSIZE, (u64)_SSSED_NONCE_SIZE);
     // Sample key and nonce
-    u32 key[_SSSED_KEYSIZE] = {0};
-    u32 nonce[_SSSED_NONCE_SIZE] = {0};
+    u32 key[8] = {0};
+    u32 nonce[4] = {0};
     // Encrypt timing
     u64 start = get_time_ns();
-    _sssed_cipher(buffer, (u64)N, key, nonce);
+    _ssc32(buffer, (u64)N, key, nonce);
     u64 end = get_time_ns();
     double elapsed_ms = (end - start) / 1e6;
     printf("Encryption took %.3f ms (%.2f MB/s)\n",
@@ -63,7 +62,7 @@ i32 main(i32 argc, i8 *argv[]){
     printf("Written Ciphertext To ct.b For Further Analysis.\n");
     // Decrypt timing
     start = get_time_ns();
-    _sssed_cipher(buffer, (u64)N, key, nonce);
+    _ssc32(buffer, (u64)N, key, nonce);
     end = get_time_ns();
     elapsed_ms = (end - start) / 1e6;
     printf("Decryption took %.3f ms (%.2f MB/s)\n\n",
