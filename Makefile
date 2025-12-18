@@ -1,6 +1,6 @@
 # Target executable
-TARGET = ssc_test.exe
-SRC = src/test.c
+TARGET = ssc_bench.exe
+SRC = src/benchmark.c
 
 # Default to GCC
 CC = gcc
@@ -14,7 +14,7 @@ ifeq ($(OS),Windows_NT)
     # Check if gcc is available
     ifeq ($(shell where gcc >nul 2>nul && echo found),found)
         CC = gcc
-        CFLAGS = -Wall -O3
+        CFLAGS = -Wall -O3 -g
         OUTFLAG = -o
     else
         CC = cl
