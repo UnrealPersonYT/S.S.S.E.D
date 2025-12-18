@@ -18,6 +18,7 @@ namespace ssc{
         // Zero Key & Nonce
         u32 Key[8]   = {0};
         u32 Nonce[4] = {0};
+
         printf("Benchmark Values Ready...\nValues:\n    Size(%llu)\nAllocating Test Data w/ Size\n", Size);
         // Start Allocation
         Start = clock();
@@ -25,18 +26,32 @@ namespace ssc{
         // End Allocation
         End = clock();
         printf("Allocation Time Taken(%.3fs)\n", (f64)(End - Start) / CLOCKS_PER_SEC);
+
         // Start Encrytion
         Start = clock();
         _ssc32(TestData, Size, Key, Nonce);
         // End Encryption
         End = clock();
         printf("Encryption Time Taken(%.3fs)\nBytes Ciphered Per Second(%.3fgb/s)\n", (f64)(End - Start) / CLOCKS_PER_SEC, (f64)((f64)Size / ((f64)(End - Start) / CLOCKS_PER_SEC)) / (f64)(1ull << 30ull));
+        
+        // Contain Ciphertext In ct
+        FILE *ct = fopen("ct", "wb");
+        if(!ct){
+            perror("Failed to open ct for writing");
+        }else{
+            fwrite(TestData, 1, Size, ct);
+            fclose(ct);
+            printf("Encrypted data written to file 'ct'\n");
+        }
+
+
         // Start Decryption
         Start = clock();
         _ssc32(TestData, Size, Key, Nonce);
         // End Decryption
         End = clock();
         printf("Decryption Time Taken(%.3fs)\nBytes Ciphered Per Second(%.3fgb/s)\n", (f64)(End - Start) / CLOCKS_PER_SEC, (f64)((f64)Size / ((f64)(End - Start) / CLOCKS_PER_SEC)) / (f64)(1ull << 30ull));
+        
         printf("Checking If Data Decrypted Correctly...\n");
         u8 Passed = 1;
         for(u64 Byte = 0; Byte < Size; ++Byte)
@@ -48,6 +63,7 @@ namespace ssc{
             printf("Success\n");
         else
             printf("Failed\n");
+
         printf("Freeing Test Data\n");
         // Start Freeing
         Start = clock();
