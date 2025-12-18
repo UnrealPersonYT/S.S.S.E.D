@@ -14,7 +14,7 @@ namespace ssc{
         printf("Starting Bench-32...\nThe SSC-32 Benchmarker...\n");
         // Ready Benchmark Values
         u64 Size = 1ull << 30ull;
-        clock_t Start, End;
+        u64 Start, End;
         // Zero Key & Nonce
         u32 Key[8]   = {0};
         u32 Nonce[4] = {0};
