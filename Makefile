@@ -26,7 +26,7 @@ else
     RM = rm -f
     ifeq ($(shell which gcc >/dev/null 2>&1 && echo found),found)
         CC = gcc
-        CFLAGS = -Wall -O3
+        CFLAGS = -Wall -O3 -g
         OUTFLAG = -o
     else
         CC = cc
