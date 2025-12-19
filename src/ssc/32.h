@@ -69,7 +69,7 @@ namespace ssc{
                     // Increment By Counter
                     PosStream[DWord] += Counter[DWord];
                     // Increment Counter
-                    ++Counter[DWord];
+                    Counter[DWord] += 16u;
                 }
             }
             // Do Rotations Of Internal Rotation
