@@ -8,7 +8,6 @@ namespace ssc{
 #endif
     /// @brief Constants Chosen Based On Uniform Bit Distribution And Hamming Distance
     #define _SSC_CONSTANTS (u32)0xDB4DA443, (u32)0xB62B4963, (u32)0xF256C239, (u32)0x68475CA7
-
     /// @brief        Simple Stream Cipher-32 Internal Round
     /// @param Chunk0 128-Bit Chunk Consisting Of 4 32-Bit Lanes
     /// @param Chunk1 128-Bit Chunk Consisting Of 4 32-Bit Lanes
@@ -35,7 +34,6 @@ namespace ssc{
             Chunk3[Lane] += Chunk2[Lane];                                          // Add
         }
     }
-
     /// @brief       Implementation Of Simple Stream Cipher-32
     /// @param Data  Data Pointer To Cipher
     /// @param Size  Total Size Of Data In Bytes
